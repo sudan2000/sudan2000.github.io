@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android插件式开发 | sudan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TIP: 插件框架:DynamicLoadApk, DynamicApk">
+<meta name="keywords" content="Android,插件式开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android插件式开发">
+<meta property="og:url" content="http://yoursite.com/2018/03/31/Android插件化开发/index.html">
+<meta property="og:site_name" content="sudan">
+<meta property="og:description" content="TIP: 插件框架:DynamicLoadApk, DynamicApk">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-01T06:57:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android插件式开发">
+<meta name="twitter:description" content="TIP: 插件框架:DynamicLoadApk, DynamicApk">
+  
+    <link rel="alternative" href="/atom.xml" title="sudan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/android.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/icon.jpeg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">golichee</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">sudan</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://golichee.com">博客首页</a></li>
+                        
+                            <li><a href="/archives">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/sudan2000" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/插件式开发/" style="font-size: 10px;">插件式开发</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sudan2000.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">golichee</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/icon.jpeg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">golichee</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">sudan</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://golichee.com">博客首页</a></li>
+                
+                    <li><a href="/archives">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/sudan2000" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android插件化开发" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/31/Android插件化开发/" class="article-date">
+      <time datetime="2018-03-30T17:25:13.000Z" itemprop="datePublished">2018-03-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android插件式开发
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件式开发/">插件式开发</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>TIP: 插件框架:DynamicLoadApk, DynamicApk<br><a id="more"></a></p>
+<h2 id="要解决的痛点"><a href="#要解决的痛点" class="headerlink" title="要解决的痛点"></a><font color="#fff" face="STCAIYUN">要解决的痛点</font></h2><ol>
+<li>项目越来越大，下载安装速度变长</li>
+<li>各业务集中在一起</li>
+<li>代码耦合严重</li>
+<li>AS编译速度越来越慢</li>
+<li>方法数超过65535</li>
+</ol>
+<h2 id="插件式开发带来的优势"><a href="#插件式开发带来的优势" class="headerlink" title="插件式开发带来的优势"></a><font color="#fff" face="STCAIYUN">插件式开发带来的优势</font></h2><ol>
+<li>客户端热部署能力</li>
+<li>编译速度提升，不再需要去放个风回来等编译结束了</li>
+<li>解耦合解耦合解耦合，重要的事情说三遍</li>
+<li>app首次启动速度提升</li>
+<li>业务模块按需加载，减少安装时间<br>&emsp;<font color="#999" face="STCAIYUN" size="2">注：multidex技术可以解决方法数超过65535个的问题上，dalvik虚拟机在首次启动app时会进行dex的初始化，将dex转为opt，但是在ART上由于安装时，就进行了dex2aot，所以首次启动的等待时间长的问题不存在了</font></li>
+</ol>
+<!-- ## <font color=#fff face="STCAIYUN">实现插件式开发需要解决技术问题</font>
+1. 编译期：资源和代码的编译
+2. 运行期：资源和代码的加载 -->
+<p><br> </p>
+<p>下面介绍一下途牛使用的DynamicLoadApk这个插件式开发框架，这个插件化框架是任玉刚和团队写的</p>
+<h1 id="DynamicLoadApk"><a href="#DynamicLoadApk" class="headerlink" title="DynamicLoadApk"></a><font color="#fff" face="STCAIYUN">DynamicLoadApk</font></h1><font color="#fff" face="STCAIYUN" size="4">1.加载插件的准备</font><br><font face="STCAIYUN" size="3">&emsp;首先插件apk并没有安装，而是改成so文件放在lib文件夹中，那么它其中的组件和资源文件是如何被系统识别并加载的呢？<br>&emsp;在加载插件之前首先做一些准备工作，我们都知道在android中加载普通类的类加载器主要有两种PathClassLoader和DexClassLoader，它们两个的区别就在于PathClassLoader只能加载系统已经安装了的apk的指定目录下的类，而DexClassLoader还可以加载未安装的apk，zip等其中的类，那么这其中我们就需要准备一个插件所在目录地址下的DexClassLoader实例了</font><br><font face="STCAIYUN" size="3" color="#fff">第一步：new一个给了指定目标地址的DexClassLoader</font>
+
+<pre><code>private DexClassLoader createDexClassLoader(String dexPath) {
+    File dexOutputDir = new File(mContext.getFilesDir().getAbsolutePath(), &quot;plugin_dex&quot;);
+    if (!dexOutputDir.exists()) {
+        dexOutputDir.mkdirs();
+    }
+    if (dexOutputDir.exists()) {
+        return new DexClassLoader(dexPath, dexOutputDir.getAbsolutePath(), mNativeLibDir, mContext.getClassLoader());  
+    } else {
+        return new DexClassLoader(dexPath, mContext.getFilesDir().getAbsolutePath(), mNativeLibDir, mContext.getClassLoader());
+    }
+}
+</code></pre><font face="STCAIYUN" size="3">&emsp;另外插件中的资源文件如何加载呢？我们都知道我们想让系统加载资源文件都是通过AssetManager这个类去管理，这个类中有个隐藏的方法addAssetPath，从方法名中就能看出，是加载资源的目录，那么我们反射方式调用这个方法，给它一个插件目录地址，那么就可以加载插件目录中的资源文件了。再把这个AssetManager传递给Resource</font><br><font face="STCAIYUN" size="3" color="#fff">第二步：创建加载指定目录资源文件的Resources</font>
+
+<pre><code>private AssetManager createAssetManager(String dexPath) {
+    AssetManager assetManager = AssetManager.class.newInstance();
+    Method addAssetPath = assetManager.getClass().getMethod(&quot;addAssetPath&quot;, String.class);
+    addAssetPath.invoke(assetManager, dexPath);
+    return assetManager;
+}
+
+private Resources createResources(AssetManager assetManager) {
+    Resources superRes = mContext.getResources();
+    Resources resources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
+    return resources;
+}
+</code></pre><font face="STCAIYUN" size="3">&emsp;将创建好的DexClassLoader和Resources实例放入插件的DLPluginPackage中，这个插件package中封装了加载同一个插件apk类和资源DexClassLoader，AssetManager，Resouces，另外还有PackageInfo等一些成员变量，至此，准备工作完成了</font><br><font face="STCAIYUN" size="3" color="#fff">第三步：创建插件Package</font>
+
+<pre><code>pluginPackage = new DLPluginPackage(dexClassLoader, resources, packageInfo, pluginInterface, realPath);
+</code></pre><font color="#fff" face="STCAIYUN" size="4">2.加载插件</font><br><font face="STCAIYUN" size="3">&emsp;那么如何启动插件的Activity并且管理它的呢，原理很简单，就是使用一个代理Activity去代理执行插件Activity(插件中的所有组件其实就是一个普通的java类，没有系统上下文管理它们)</font><br><font face="STCAIYUN" size="3" color="#fff">第一步：启动插件Activity实际是启动一个代理Activity</font>
+
+<pre><code>public int startPluginActivityForResult(Context context, DLIntent dlIntent, int requestCode) {
+    String packageName = dlIntent.getPluginPackage();
+    DLPluginPackage pluginPackage = mPackagesHolder.get(packageName);
+    final String className = getPluginActivityFullPath(dlIntent, pluginPackage);
+    Class&lt;?&gt; clazz = loadPluginClass(pluginPackage.classLoader, className);
+    Class&lt;? extends Activity&gt; activityClass = getProxyActivityClass(clazz);
+    dlIntent.setClass(context, activityClass);
+    dlIntent.setData(Uri.parse(new StringBuilder()
+            .append(DLConstants.PLUGIN_SCHEMA).append(&quot;:&quot;)
+            .append(packageName).append(&quot;:&quot;).append(className).toString()));
+    performStartActivityForResult(context, dlIntent, requestCode);
+    return START_RESULT_SUCCESS;
+}
+</code></pre><font face="STCAIYUN" size="3">&emsp;代理Activity中持有DLProxyImpl实例，在代理Activity的onCreate方法中调用DLProxyImpl的onPreCreate方法用反射方法创建插件Activity实例并绑定到代理Activity中，这样在系统管理代理Activity的时候，代理Activity就可以同时调用插件Activity的生命周期方法，达到系统管理的效果</font><br><font face="STCAIYUN" size="3" color="#fff">第二步：在代理activity创建时反射创建插件activity并代理它的生命周期</font>
+
+<pre><code>public int onPreCreate(Intent intent) {
+    Uri uri_data = intent.getData();
+    String uri_str = uri_data.toString();
+    String[] info = uri_str.split(&quot;:&quot;);
+    mPackageName = info[1];
+    mClass = info[2];
+    mPluginManager = DLPluginManager.getInstance(mProxyActivity);
+    mPluginPackage = mPluginManager.getPackage(mPackageName);
+    mAssetManager = mPluginPackage.assetManager;
+    mResources = mPluginPackage.resources;
+    intent.setExtrasClassLoader(mPluginPackage.classLoader);
+    initializeActivityInfo();
+    handleActivityInfo();
+    //通过创建和销毁来模拟实现task的管理
+    int result = mPluginManager.setLauncheMode(mProxyActivity, mClass, mActivityInfo.launchMode);
+    Class&lt;?&gt; localClass = getClassLoader().loadClass(mClass);
+    Constructor&lt;?&gt; localConstructor = localClass.getConstructor(new Class[]{});
+    Object instance = localConstructor.newInstance(new Object[]{});
+    mPluginActivity = (DLPlugin) instance;
+    ((DLAttachable) mProxyActivity).attach(mPluginActivity);
+    // attach the proxy activity and plugin package to the mPluginActivity
+    mPluginActivity.attach(mProxyActivity, mPluginPackage.packageName);
+    return 0;
+}
+</code></pre><font face="STCAIYUN" size="3">&emsp;以上就大致解释了DynamicLoadAPK的框架原理，这个框架思路很巧妙，使用代理方式去管理插件apk中的组件，但是需要再框架中实现了的组件才可以用，比如android的四大组件，目前只实现了activity，service这两种，而广播和contentProvider由于使用频率不高并没有在框架中实现，而且使用的时候是需要遵守一些使用的约束的，所以各业务新来的小伙伴需要一定的培训去了解一下这个插件化开发框架的原理才能更好的进行业务的开发<br>插件的开发需要遵循一定的约束，比如：<br>Activity需要继承自DLBasePluginActivity<br>使用that代替this使用，因为插件Activity只是一个普通的java类，并没有上下文<br>插件在开发中需要使用到的公共类库中方法，在插件gradle中使用provided提供编译支持，但是不打包进入apk中<br></font>
+
+<p><br><br>另外简单介绍一下携程的DynamicApk这个插件式开发框架</p>
+<h1 id="DynamicApk"><a href="#DynamicApk" class="headerlink" title="DynamicApk"></a><font color="#fff" face="STCAIYUN">DynamicApk</font></h1><font color="#fff" face="STCAIYUN" size="4">1.资源的编译和加载</font><br><font face="STCAIYUN" size="3">&emsp;众所周知，android在打包过程中，使用aapt进行资源的打包，由于历史原因携程的插件中需要使用主工程的资源文件，那么就需要插件资源去依赖主工程apk，而这一点是可以做到，在aapt打包的过程其实是依赖了android.jar包中的android资源的，比如你可以通过@android:color/opaque_red形式来引用SDK自带资源</font><br><font face="STCAIYUN" size="3" color="#fff">第一步：修改aapt命令参数，引用主工程资源</font><br><font face="STCAIYUN" size="3">&emsp;打包资源文件后会生成R.java文件，去定义Android程序中所有各类型的资源的索引,所有id由三个字节表示，第一字节代表了Package，第二字节为分类，三四字节为类内ID</font><br><font face="STCAIYUN" size="3" color="#fff">第二步：修改头字节给不同apk分配不同packageId,避免冲突</font><br><font face="STCAIYUN" size="3">&emsp;同样是使用反射方式修改AssetManager中的addAssetPath方法中的path路径，那么是如何将这个自定义的资源管理类去接管系统的资源管理类呢，那么就需要在系统创建组件的时机去hack系统的方法，这个框架中就hack了Instrumentation类和在创建activity时换取了自定义的Resources类</font><br><font color="#fff" face="STCAIYUN" size="4">2.类的加载</font><br><font face="STCAIYUN" size="3">&emsp;如果你了解google的MultiDex的加载方式，那么对这个框架类的加载就不陌生了，它也是修改了android的类加载器PathClassLoader其中的成员变量pathList，并且将插件的dex的目录添加到这个成员变量的Elements数组中，这样，查找类的时候就会遍历所有的数组去加载类</font>
+
+
+
+
+
+
+
+
+
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/03/31/Android插件化开发/">Android插件式开发</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 golichee 的个人博客">golichee</a></p>
+        <p><span>发布时间:</span>2018年03月31日 - 01时25分</p>
+        <p><span>最后更新:</span>2018年04月01日 - 14时57分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/03/31/Android插件化开发/" title="Android插件式开发">http://yoursite.com/2018/03/31/Android插件化开发/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/03/31/Android插件化开发/　　作者: golichee" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/23/firstblog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">firstblog</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#要解决的痛点"><span class="toc-number">1.</span> <span class="toc-text">要解决的痛点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件式开发带来的优势"><span class="toc-number">2.</span> <span class="toc-text">插件式开发带来的优势</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DynamicLoadApk"><span class="toc-number"></span> <span class="toc-text">DynamicLoadApk</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DynamicApk"><span class="toc-number"></span> <span class="toc-text">DynamicApk</span></a>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/03/23/firstblog/" title="下一篇: firstblog">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/03/31/Android插件化开发/">Android插件式开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/firstblog/">firstblog</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/22/Hello World/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/13/Java-NIO/">Java NIO</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 golichee
+            </div>
+            
+        </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 20;
+            var backgroundimg = "url(/background/bg-" + backgroundnum +".jpg)";
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
