@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>View相关的知识 | sudan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TIP: View, ViewRootImpl, DecorView, PhoneWindow">
+<meta name="keywords" content="Android,View">
+<meta property="og:type" content="article">
+<meta property="og:title" content="View相关的知识">
+<meta property="og:url" content="http://yoursite.com/2018/04/12/View相关的知识/index.html">
+<meta property="og:site_name" content="sudan">
+<meta property="og:description" content="TIP: View, ViewRootImpl, DecorView, PhoneWindow">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-12T15:39:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="View相关的知识">
+<meta name="twitter:description" content="TIP: View, ViewRootImpl, DecorView, PhoneWindow">
+  
+    <link rel="alternative" href="/atom.xml" title="sudan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/android.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/icon.jpeg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">golichee</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">sudan</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://golichee.com">博客首页</a></li>
+                        
+                            <li><a href="/archives">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/sudan2000" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/插件式开发/" style="font-size: 10px;">插件式开发</a> <a href="/tags/网络请求/" style="font-size: 10px;">网络请求</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sudan2000.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">golichee</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/icon.jpeg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">golichee</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">sudan</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://golichee.com">博客首页</a></li>
+                
+                    <li><a href="/archives">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/sudan2000" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-View相关的知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/04/12/View相关的知识/" class="article-date">
+      <time datetime="2018-04-12T12:55:55.000Z" itemprop="datePublished">2018-04-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      View相关的知识
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>TIP: View, ViewRootImpl, DecorView, PhoneWindow<br><a id="more"></a></p>
+<h1 id="在Activity的setContentView-方法中完成了："><a href="#在Activity的setContentView-方法中完成了：" class="headerlink" title="在Activity的setContentView()方法中完成了："></a><font color="#fff" face="STCAIYUN">在Activity的setContentView()方法中完成了：</font></h1><font size="3" color="#fff">phoneWindow中创建了DecorView并加载了布局有了contentParent，activity.getDelegate()中创建subDecor，并且将subDecor加入window的content中，然后将我们的布局文件加载到contentParent中，直接看源码（所有的源码都删除了大部分不重要的部分，方便阅读）</font>
+
+<h2 id="Activity-中"><a href="#Activity-中" class="headerlink" title="Activity 中"></a>Activity 中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void setContentView(@LayoutRes int layoutResID) &#123;</span><br><span class="line">  getDelegate().setContentView(layoutResID);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="AppCompatDelegateImplV9中"><a href="#AppCompatDelegateImplV9中" class="headerlink" title="AppCompatDelegateImplV9中"></a>AppCompatDelegateImplV9中</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void setContentView(int resId) &#123;</span><br><span class="line">     ensureSubDecor(); //1.确保subDecor创建出来</span><br><span class="line">     ViewGroup contentParent = (ViewGroup) mSubDecor.findViewById(android.R.id.content);</span><br><span class="line">     contentParent.removeAllViews();</span><br><span class="line">     LayoutInflater.from(mContext).inflate(resId, contentParent);</span><br><span class="line">     mOriginalWindowCallback.onContentChanged();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private void ensureSubDecor() &#123;</span><br><span class="line">     mSubDecor = createSubDecor();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private ViewGroup createSubDecor() &#123;</span><br><span class="line">     mWindow.getDecorView();</span><br><span class="line">     //此处根据theme不同加载不同的布局文件为subDecor</span><br><span class="line">     //如subDecor = (ViewGroup) LayoutInflater.from(themedContext)</span><br><span class="line">                     .inflate(R.layout.abc_screen_toolbar, null);</span><br><span class="line">     final ContentFrameLayout contentView = (ContentFrameLayout) subDecor.findViewById(</span><br><span class="line">             R.id.action_bar_activity_content);</span><br><span class="line">     final ViewGroup windowContentView = (ViewGroup) mWindow.findViewById(android.R.id.content);</span><br><span class="line">     if (windowContentView != null) &#123;</span><br><span class="line">     //给ContentFrameLayout设置ID为content</span><br><span class="line">         windowContentView.setId(View.NO_ID);</span><br><span class="line">         contentView.setId(android.R.id.content);</span><br><span class="line">     &#125;</span><br><span class="line">     //将subDecor加入到window的contentParent中</span><br><span class="line">     mWindow.setContentView(subDecor);</span><br><span class="line">     return subDecor;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="PhoneWindow中"><a href="#PhoneWindow中" class="headerlink" title="PhoneWindow中"></a>PhoneWindow中</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public final View getDecorView() &#123;</span><br><span class="line">     if (mDecor == null || mForceDecorInstall) &#123;</span><br><span class="line">         installDecor();</span><br><span class="line">     &#125;</span><br><span class="line">     return mDecor;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">private void installDecor() &#123;</span><br><span class="line">     if (mDecor == null) &#123;</span><br><span class="line">         mDecor = generateDecor(-1);</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">         mDecor.setWindow(this);</span><br><span class="line">     &#125;</span><br><span class="line">     if (mContentParent == null) &#123;</span><br><span class="line">     	//在decorView中加载一个布局，布局中有一个ID为content的FrameLayout</span><br><span class="line">         mContentParent = generateLayout(mDecor);</span><br><span class="line">         final DecorContentParent decorContentParent = (DecorContentParent) mDecor.findViewById(</span><br><span class="line">                 R.id.decor_content_parent);</span><br><span class="line"></span><br><span class="line">         if (decorContentParent != null) &#123;</span><br><span class="line">             mDecorContentParent = decorContentParent;</span><br><span class="line">             mDecorContentParent.setWindowCallback(getCallback());</span><br><span class="line">             </span><br><span class="line">         &#125; else &#123;</span><br><span class="line">             mTitleView = (TextView) findViewById(R.id.title);</span><br><span class="line">           </span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">protected ViewGroup generateLayout(DecorView decor) &#123;</span><br><span class="line">     int layoutResource;</span><br><span class="line">     ...</span><br><span class="line">     else &#123;</span><br><span class="line">         layoutResource = R.layout.screen_simple;</span><br><span class="line">     &#125;</span><br><span class="line">     //在decorView中加载一个布局</span><br><span class="line">     mDecor.onResourcesLoaded(mLayoutInflater, layoutResource);</span><br><span class="line">     ViewGroup contentParent = (ViewGroup)findViewById(ID_ANDROID_CONTENT);</span><br><span class="line">     //此处找到ID为content的contentParent</span><br><span class="line">     return contentParent;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title=" 总结: "></a><font color="#fff"> 总结: </font></h1>  <font size="3" color="#fff"> <code>Activity</code> 的 <code>setContentView</code> -&gt; <code>AppCompatDelegateImplV9</code> 的 <code>setContentView</code><br>  1. 确保subdecor创建<br>  2. 将设置的布局文件加载到ID为content的contentParant中<br><br>   -&gt; <code>AppCompatDelegateImplV9</code> 的 <code>createSubDecor</code><br>  1. PhoneWindow创建DecorView<br>  2. 根据theme不同加载不同的布局文件为subDecor<br>  3. 给ContentFrameLayout设置ID为content<br>  4. 将subDecor加入到window的contentParent中<br><br>   -&gt; <code>PhoneWindow</code> 的 <code>installDecor</code><br>  1. new一个DecorView<br>  2. 在decorView中加载一个布局，布局中有一个ID为content的FrameLayout作为contentParent<br>   </font>
+
+<p><br></p>
+<p>  这时候你会问那View的“管家”ViewRootImpl呢？它是什么时候创建的？</p>
+<font size="3" color="#fff">下面我们再看Activity创建，我们忽略与AMS的IPC过程，最后调用 <code>ActivityThread</code> 的 <code>performLaunchActivity</code></font>
+
+<h2 id="ActivityThread中"><a href="#ActivityThread中" class="headerlink" title="ActivityThread中"></a>ActivityThread中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private Activity performLaunchActivity(ActivityClientRecord r, </span><br><span class="line">		Intent customIntent) &#123;</span><br><span class="line">       </span><br><span class="line">    Activity activity = mInstrumentation.newActivity(</span><br><span class="line">            cl, component.getClassName(), r.intent);</span><br><span class="line">    Application app = r.packageInfo.makeApplication(false, mInstrumentation); </span><br><span class="line">    Context appContext = createBaseContextForActivity(r, activity);</span><br><span class="line">    Configuration config = new Configuration(mCompatConfiguration);</span><br><span class="line"></span><br><span class="line">    Window window = null;</span><br><span class="line">    activity.attach(appContext, this, getInstrumentation(), r.token,</span><br><span class="line">            r.ident, app, r.intent, r.activityInfo, title, r.parent,</span><br><span class="line">            r.embeddedID, r.lastNonConfigurationInstances, config,</span><br><span class="line">            r.referrer, r.voiceInteractor, window);</span><br><span class="line"></span><br><span class="line">    return activity;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Activity中"><a href="#Activity中" class="headerlink" title="Activity中"></a>Activity中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">final void attach(Context context, ActivityThread aThread,</span><br><span class="line">            Instrumentation instr, IBinder token, int ident,</span><br><span class="line">            Application application, Intent intent, ActivityInfo info,</span><br><span class="line">            CharSequence title, Activity parent, String id,</span><br><span class="line">            NonConfigurationInstances lastNonConfigurationInstances,</span><br><span class="line">            Configuration config, String referrer, IVoiceInteractor voiceInteractor,</span><br><span class="line">            Window window) &#123;</span><br><span class="line">    attachBaseContext(context);</span><br><span class="line">	//创建PhoneWindow，并保存到activity的mWindow成员变量中</span><br><span class="line">    mWindow = new PhoneWindow(this, window);</span><br><span class="line">	</span><br><span class="line">    mWindow.setWindowManager(</span><br><span class="line">            (WindowManager)context.getSystemService(Context.WINDOW_SERVICE),</span><br><span class="line">            mToken, mComponent.flattenToString(),</span><br><span class="line">            (info.flags &amp; ActivityInfo.FLAG_HARDWARE_ACCELERATED) != 0);</span><br><span class="line">    if (mParent != null) &#123;</span><br><span class="line">            mWindow.setContainer(mParent.getWindow());</span><br><span class="line">    &#125;</span><br><span class="line">    mWindowManager = mWindow.getWindowManager();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Window中"><a href="#Window中" class="headerlink" title="Window中"></a>Window中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void setWindowManager(WindowManager wm, IBinder appToken, String appName,</span><br><span class="line">            boolean hardwareAccelerated) &#123;</span><br><span class="line">    if (wm == null) &#123;</span><br><span class="line">        wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);</span><br><span class="line">    &#125;</span><br><span class="line">    //new一个WindowManagerImpl</span><br><span class="line">    mWindowManager = ((WindowManagerImpl)wm).createLocalWindowManager(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<font size="3" color="#fff">Window是一个抽象的概念，在实际使用中无法直接访问Window，对Window的访问必须通过WindowManager，WindowManager是一个接口，它的真正实现是WindowManagerImpl类<br>再看 <code>ActivityThead</code> 中的 <code>handleResumeActivity</code> </font>
+
+<h2 id="ActivityThead中"><a href="#ActivityThead中" class="headerlink" title="ActivityThead中"></a>ActivityThead中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">final void handleResumeActivity(IBinder token,</span><br><span class="line">            boolean clearHide, boolean isForward, boolean reallyResume, int seq, String reason) &#123;</span><br><span class="line">        </span><br><span class="line">    r = performResumeActivity(token, clearHide, reason);</span><br><span class="line"></span><br><span class="line">    ViewManager wm = a.getWindowManager();</span><br><span class="line">    View decor = r.window.getDecorView();</span><br><span class="line">    wm.addView(decor, l);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="WindowManagerImpl中"><a href="#WindowManagerImpl中" class="headerlink" title="WindowManagerImpl中"></a>WindowManagerImpl中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void addView(@NonNull View view, @NonNull ViewGroup.LayoutParams params) &#123;</span><br><span class="line">    applyDefaultToken(params);</span><br><span class="line">    mGlobal.addView(view, params, mContext.getDisplay(), mParentWindow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="WindowManagerGlobal中"><a href="#WindowManagerGlobal中" class="headerlink" title="WindowManagerGlobal中"></a>WindowManagerGlobal中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void addView(View view, ViewGroup.LayoutParams params,</span><br><span class="line">        Display display, Window parentWindow) &#123;</span><br><span class="line">   //创建了ViewRootImpl</span><br><span class="line">    ViewRootImpl root = new ViewRootImpl(view.getContext(), display);</span><br><span class="line">	//view是Window中的DecorView</span><br><span class="line">    mViews.add(view);</span><br><span class="line">    mRoots.add(root);</span><br><span class="line">    mParams.add(wparams);</span><br><span class="line">    root.setView(view, wparams, panelParentView);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ViewRootImpl中"><a href="#ViewRootImpl中" class="headerlink" title="ViewRootImpl中"></a>ViewRootImpl中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> public void setView(View view, WindowManager.LayoutParams attrs, View panelParentView) &#123;            </span><br><span class="line">    //把DecorView保存在mView成员变量</span><br><span class="line">    mView = view;</span><br><span class="line">	</span><br><span class="line">    requestLayout();</span><br><span class="line">  	//通过WindowSession和WMS交互</span><br><span class="line">    res = mWindowSession.addToDisplay(mWindow, mSeq, mWindowAttributes,</span><br><span class="line">        getHostVisibility(), mDisplay.getDisplayId(),</span><br><span class="line">        mAttachInfo.mContentInsets, mAttachInfo.mStableInsets,</span><br><span class="line">        mAttachInfo.mOutsets, mInputChannel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<font size="3" color="#fff">ViewRootImpl的构造方法内创建了WindowSession，通过它与WindowManagerService进行IPC通信，从而将DecorView最终添加到Window上，最后通过WMS调用ViewRootImpl的performTraverals方法开始View的测量、布局、绘制流程。<br><br>那么至此，<code>Activity</code> 创建后， ‘Window‘ , <code>DecorView</code>, <code>WindowManager</code>, <code>ViewRootImpl</code>, ‘WMS` 如何联系起来就说完了</font>
+
+
+
+
+
+
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/04/12/View相关的知识/">View相关的知识</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 golichee 的个人博客">golichee</a></p>
+        <p><span>发布时间:</span>2018年04月12日 - 20时55分</p>
+        <p><span>最后更新:</span>2018年04月12日 - 23时39分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/04/12/View相关的知识/" title="View相关的知识">http://yoursite.com/2018/04/12/View相关的知识/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/04/12/View相关的知识/　　作者: golichee" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/01/Sth-About-Network-in-Android/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Something About Network in Android</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#在Activity的setContentView-方法中完成了："><span class="toc-number">1.</span> <span class="toc-text">在Activity的setContentView()方法中完成了：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Activity-中"><span class="toc-number">1.1.</span> <span class="toc-text">Activity 中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AppCompatDelegateImplV9中"><span class="toc-number">1.2.</span> <span class="toc-text">AppCompatDelegateImplV9中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PhoneWindow中"><span class="toc-number">1.3.</span> <span class="toc-text">PhoneWindow中</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text"> 总结: </span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ActivityThread中"><span class="toc-number">2.1.</span> <span class="toc-text">ActivityThread中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Activity中"><span class="toc-number">2.2.</span> <span class="toc-text">Activity中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Window中"><span class="toc-number">2.3.</span> <span class="toc-text">Window中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ActivityThead中"><span class="toc-number">2.4.</span> <span class="toc-text">ActivityThead中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowManagerImpl中"><span class="toc-number">2.5.</span> <span class="toc-text">WindowManagerImpl中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowManagerGlobal中"><span class="toc-number">2.6.</span> <span class="toc-text">WindowManagerGlobal中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ViewRootImpl中"><span class="toc-number">2.7.</span> <span class="toc-text">ViewRootImpl中</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/04/01/Sth-About-Network-in-Android/" title="下一篇: Something About Network in Android">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/View相关的知识/">View相关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/01/Sth-About-Network-in-Android/">Something About Network in Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/31/Android插件化开发/">Android插件式开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/22/Hello World/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/13/Java-NIO/">Java NIO</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 golichee
+            </div>
+            
+        </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 20;
+            var backgroundimg = "url(/background/bg-" + backgroundnum +".jpg)";
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
